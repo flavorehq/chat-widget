@@ -53,8 +53,12 @@ const styles = {
   },
 };
 
-function ChatWidget({ bot_id }) {
+function ChatWidget({ bot_id, accessLink }) {
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const url = accessLink
+    ? `${accessLink}/chat/${bot_id}`
+    : `https://flawork.ch/chat/${bot_id}`;
 
   return (
     <ChakraProvider>
@@ -98,12 +102,7 @@ function ChatWidget({ bot_id }) {
         minWidth={["100%", "450px"]}
         right={["0", "20px", "20px"]}
       >
-        <iframe
-          style={styles.iframe}
-          width="100%"
-          height="100%"
-          src={`https://flawork.ch/chat/${bot_id}`}
-        />
+        <iframe style={styles.iframe} width="100%" height="100%" src={url} />
       </Box>
     </ChakraProvider>
   );
